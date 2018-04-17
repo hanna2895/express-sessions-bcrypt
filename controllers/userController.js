@@ -6,4 +6,21 @@ router.get('/', (req, res) => {
 	res.send('user controller')		
 })
 
+router.get('/register', (req, res) => {
+	console.log(req.session);
+	res.render('register.ejs');		
+})
+
+router.post('/register', (req, res) => {
+	
+
+	// you can add whatever data you want
+	req.session.username = req.body.username;
+	req.session.loggedIn = true;
+
+	console.log(req.session, "hey this was logged");
+
+	res.send(req.body)		
+})
+
 module.exports = router;
