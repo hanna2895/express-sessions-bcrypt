@@ -13,8 +13,7 @@ router.get('/', (req, res) => {
 			message: message
 		})		
 	} else {
-		// res.redirect('/users/register')
-		res.send('you suck and need to log in')
+		res.redirect('/users/register')
 	}
 			
 })

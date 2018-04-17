@@ -26,4 +26,14 @@ router.post('/register', (req, res) => {
 	// res.send(req.body)		
 })
 
+router.get('/logout', (req, res) => {
+	req.session.destroy((err) => {
+		if (err) {
+			console.log("oh shit", err);
+		} else {
+			res.redirect('/users/register')
+		}
+	})		
+})
+
 module.exports = router;
