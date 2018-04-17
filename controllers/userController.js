@@ -17,10 +17,13 @@ router.post('/register', (req, res) => {
 	// you can add whatever data you want
 	req.session.username = req.body.username;
 	req.session.loggedIn = true;
+	req.session.message = "Thanks for signing up"
 
 	console.log(req.session, "hey this was logged");
 
-	res.send(req.body)		
+	res.redirect('/home')
+
+	// res.send(req.body)		
 })
 
 module.exports = router;
