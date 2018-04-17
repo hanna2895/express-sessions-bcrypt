@@ -9,15 +9,16 @@
 		<p style="background-color: pink"><%=message%></p>
 	<%}%>
 
-	<h3>Welcome to the site. Please register for an account below.</h3>
 
-	<form action="/users/register" method="POST">
+	<h3>Welcome to the site. Please log in to continue..</h3>
+
+	<form action="/users/login" method="POST">
 		<input type="text" name="username" placeholder="Username" />
 		<input type="password" name="password" placeholder="Password" />
-		<button>Register</button>
+		<button>Login</button>
 	</form>
 
-	<p><small>Already have an account? <a href="/users/login">Log in here</a></small></p>
+	<p><small>Need to create an account? <a href="/users/register">Click here</a></small></p>
 
 </body>
 </html>

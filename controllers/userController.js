@@ -10,7 +10,11 @@ router.get('/', (req, res) => {
 
 router.get('/register', (req, res) => {
 	console.log(req.session);
-	res.render('register.ejs');		
+	const message = req.session.message;
+	req.session.message = null;
+	res.render('register.ejs', {
+		message: message
+	});		
 })
 
 router.post('/register', (req, res) => {
@@ -45,6 +49,15 @@ router.get('/logout', (req, res) => {
 		} else {
 			res.redirect('/users/register')
 		}
+	})		
+})
+
+// ** login routes ** get 
+router.get('/login', (req, res) => {
+	const message = req.session.message;
+	req.session.message = null;
+	res.render('login.ejs', {
+		message: message
 	})		
 })
 

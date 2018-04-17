@@ -13,6 +13,8 @@ router.get('/', (req, res) => {
 			message: message
 		})		
 	} else {
+
+		req.session.message = "You must be logged in to do that"
 		res.redirect('/users/register')
 	}
 			
