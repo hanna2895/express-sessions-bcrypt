@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user.js');
 
+const bcrypt = require('bcrypt')
+
 router.get('/', (req, res) => {
 	res.send('user controller')		
 })
@@ -12,18 +14,28 @@ router.get('/register', (req, res) => {
 })
 
 router.post('/register', (req, res) => {
-	
+	// capture password
+	const password = req.body.password;
 
-	// you can add whatever data you want
-	req.session.username = req.body.username;
-	req.session.loggedIn = true;
-	req.session.message = "Thanks for signing up"
+	// hash the password
+	// 1st param = the pwd you are encrypting
+	// 2nd param = the algorithm we encrypt with (& salt)
+	const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 
-	console.log(req.session, "hey this was logged");
+	//this is the obj we will store in our db
+	const userDbEntry = {
+		username: req.body.username,
+		password: passwordHash
+	}
 
-	res.redirect('/home')
+	User.create(userDbEntry, (err, createdUser) => {
+		console.log(createdUser, "\n ^^^ this is the user that was created ----------------------" );
+		req.session.username = req.body.username,
+		req.session.loggedIn = true,
+		req.session.message = "Thanks for signing up"
 
-	// res.send(req.body)		
+		res.redirect('/home')
+	})	
 })
 
 router.get('/logout', (req, res) => {
